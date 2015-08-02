@@ -136,4 +136,13 @@ public class VendingTest {
 		assertEquals("INSERT COIN", vending.display());
 	}
 	
+	@Test
+	public void shouldDisplayInsuffcientFundsIfNotEnoughMoneyForItem() {
+		vending.insertCoin(quarter);
+		
+		vending.purchase(candy);
+		
+		assertEquals("INSUFFICENT FUNDS", vending.display());
+	}
+	
 }
