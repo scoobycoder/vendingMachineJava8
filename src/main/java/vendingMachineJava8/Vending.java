@@ -10,7 +10,7 @@ public class Vending {
 		if (sum == 0) {
 			return INSERTCOIN;
 		}
-		return String.format("%.2f",sum);
+		return makeChangeFormat(sum);
 	}
 
 	public void insertCoin(Coin coin) {
@@ -18,12 +18,16 @@ public class Vending {
 	}
 
 	public String coinTray() {
-		return String.format("%.2f",coinTray);
+		return makeChangeFormat(coinTray);
 	}
 
 	public void returnCoin() {
 		coinTray = sum;
 		sum = 0;
+	}
+	
+	private String makeChangeFormat(double sums) {
+		return String.format("%.2f",sums);
 	}
 
 }
