@@ -8,8 +8,8 @@ public class Vending {
 		return sumOfChange;
 	}
 
-	public void insertCoin(Coins coin) {
-		sumOfChange = String.valueOf(coin.value());
+	public void insertCoin(Coin coin) {
+		sumOfChange = coin.value();
 	}
 
 }

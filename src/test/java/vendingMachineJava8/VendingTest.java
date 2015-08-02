@@ -25,13 +25,13 @@ public class VendingTest {
 	
 	@Test
 	public void shouldDisplayFiveCentsForNickle() {
-		vending.insertCoin(new Coins(Coin.NICKLE));
+		vending.insertCoin(new Nickle());
 		assertEquals("0.05", vending.display());
 	}
 	
 	@Test
 	public void shouldDisplay10CentsforDime() {
-		vending.insertCoin(new Coins(Coin.DIME));
+		vending.insertCoin(new Dime());
 		assertEquals("0.10", vending.display());
 	}
 	

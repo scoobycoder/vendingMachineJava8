@@ -1,5 +1,8 @@
 package vendingMachineJava8;
 
-public enum Coin {
-	NICKLE, DIME;
+public class Coin {
+	
+	public String value() {
+		return "-1";
+	}
 }
