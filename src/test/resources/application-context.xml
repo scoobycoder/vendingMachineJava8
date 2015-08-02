@@ -13,4 +13,10 @@
 	<bean id="dime"
           class="vendingMachineJava8.Dime">
     </bean>
+	<bean id="quarter"
+          class="vendingMachineJava8.Quarter">
+    </bean>
+	<bean id="penny"
+          class="vendingMachineJava8.Penny">
+    </bean>
 </beans>

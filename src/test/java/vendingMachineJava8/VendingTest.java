@@ -11,8 +11,10 @@ public class VendingTest {
 
 	private ApplicationContext applicationContext;
 	private Vending vending;
-	private Nickle nickle;
-	private Dime dime;
+	private Coin nickle;
+	private Coin dime;
+	private Coin quarter;
+	private Coin penny;
 
 	@Before
 	public void setup() {
@@ -20,6 +22,9 @@ public class VendingTest {
 		vending = (Vending) applicationContext.getBean("vending");
 		nickle = (Nickle) applicationContext.getBean("nickle");
 		dime = (Dime) applicationContext.getBean("dime");
+		quarter = (Quarter) applicationContext.getBean("quarter");
+		penny = (Penny) applicationContext.getBean("penny");
+		
 	}
 	
 	@Test
@@ -35,8 +40,14 @@ public class VendingTest {
 	
 	@Test
 	public void shouldDisplay10CentsforDime() {
-		vending.insertCoin(dime);
-		assertEquals("0.10", vending.display());
+		vending.insertCoin(quarter);
+		assertEquals("0.25", vending.display());
+	}
+	
+	@Test
+	public void shouldDisplayInsertCoinforAnyOtherCoin() {
+		vending.insertCoin(penny);
+		assertEquals("INSERT COIN", vending.display());
 	}
 	
 }
