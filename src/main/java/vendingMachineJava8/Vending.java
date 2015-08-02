@@ -2,14 +2,18 @@ package vendingMachineJava8;
 
 public class Vending {
 
-	private String sumOfChange = "INSERT COIN";
+	public static final String INSERTCOIN = "INSERT COIN"; 
+	private double sum = 0;
 	
 	public String display() {
-		return sumOfChange;
+		if (sum == 0) {
+			return INSERTCOIN;
+		}
+		return String.valueOf(sum);
 	}
 
 	public void insertCoin(Coin coin) {
-		sumOfChange = coin.value();
+		sum += coin.value();
 	}
 
 }

@@ -3,6 +3,7 @@ package vendingMachineJava8;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -50,4 +51,14 @@ public class VendingTest {
 		assertEquals("INSERT COIN", vending.display());
 	}
 	
+	@Test @Ignore
+	public void shouldSumAllChangeEntered() {
+		vending.insertCoin(quarter);
+		vending.insertCoin(quarter);
+		vending.insertCoin(quarter);
+		vending.insertCoin(nickle);
+		vending.insertCoin(penny);
+		vending.insertCoin(dime);
+		assertEquals("0.90", vending.display());
+	}
 }
