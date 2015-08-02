@@ -45,6 +45,7 @@ public class Vending {
 		if (item.getCost() <= sum) {
 			itemsInBin.add(item);
 			sum -= item.getCost();
+			returnCoin();
 		}
 	}
 

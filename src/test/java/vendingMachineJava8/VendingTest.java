@@ -95,16 +95,45 @@ public class VendingTest {
 	}
 	
 	@Test
-	public void shouldAllowPurchaseOfChipsForOneTwentyFiveAndCandyForFifty() {
-		insertMultipleCoins(quarter, 7);
+	public void shouldAllowForPurchaseOfCandyForFiftyWhenCandyIsPressed() {
+		insertMultipleCoins(quarter, 2);
 		ArrayList<VendingItem> expectedItems = new ArrayList<VendingItem>();
-		expectedItems.add(chips);
 		expectedItems.add(candy);
 		
-		vending.purchase(chips);
 		vending.purchase(candy);
 		
 		assertEquals(expectedItems, vending.itemBin());
+	}
+	
+	@Test
+	public void shouldMakeChangeForItemsPurchased() {
+		insertMultipleCoins(quarter, 3);
+		vending.purchase(candy);
+		
+		assertEquals("0.25", vending.coinTray());
+	}
+	
+	@Test
+	public void shouldAllowForPurchaseOfMultipleItemsWhenMoneyEnteredBetweenTransactions() {
+		insertMultipleCoins(quarter, 2);
+		ArrayList<VendingItem> expectedItems = new ArrayList<VendingItem>();
+		expectedItems.add(candy);
+		expectedItems.add(chips);
+		
+		vending.purchase(candy);
+		insertMultipleCoins(quarter, 5);
+		vending.purchase(chips);
+		
+		assertEquals(expectedItems, vending.itemBin());
+	}
+	
+	@Test
+	public void shouldReturnToInsertCoinDisplayAfterPurchaseComplete() {
+		insertMultipleCoins(quarter, 2);
+		
+		vending.purchase(candy);
+		
+		assertEquals("INSERT COIN", vending.display());
 	}
 	
 }
