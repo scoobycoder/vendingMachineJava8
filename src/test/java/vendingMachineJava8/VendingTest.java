@@ -24,10 +24,15 @@ public class VendingTest {
 	}
 	
 	@Test
-	public void shouldDisplayTotalOfChangeEntered() {
+	public void shouldDisplayFiveCentsForNickle() {
 		vending.insertCoin(new Coins(Coin.NICKLE));
-		
 		assertEquals("0.05", vending.display());
+	}
+	
+	@Test
+	public void shouldDisplay10CentsforDime() {
+		vending.insertCoin(new Coins(Coin.DIME));
+		assertEquals("0.10", vending.display());
 	}
 	
 }
