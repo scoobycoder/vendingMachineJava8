@@ -1,5 +1,9 @@
 package vendingMachineJava8;
 
-public enum Coins {
-	NICKLE;
+public class Coins {
+
+	public Coins(Coin coinType) {
+		// TODO Auto-generated constructor stub
+	}
+
 }

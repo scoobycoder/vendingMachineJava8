@@ -25,7 +25,7 @@ public class VendingTest {
 	
 	@Test
 	public void shouldDisplayTotalOfChangeEntered() {
-		vending.insertCoin(new Coin(Coins.NICKLE));
+		vending.insertCoin(new Coins(Coin.NICKLE));
 		
 		assertEquals("0.05", vending.display());
 	}
