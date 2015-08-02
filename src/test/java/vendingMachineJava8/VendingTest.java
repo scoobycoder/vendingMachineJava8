@@ -62,6 +62,15 @@ public class VendingTest {
 		assertEquals("0.90", vending.display());
 	}
 	
+	@Test
+	public void shouldReturnAllChangeWhenReturnChangeIsPressed() {
+		vending.insertCoin(quarter);
+		vending.insertCoin(dime);
+		vending.returnCoin();
+		
+		assertEquals("INSERT COIN", vending.display());
+		assertEquals("0.35", vending.coinTray());
+	}
 	
 	
 }
