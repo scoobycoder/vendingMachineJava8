@@ -51,7 +51,7 @@ public class VendingTest {
 		assertEquals("INSERT COIN", vending.display());
 	}
 	
-	@Test @Ignore
+	@Test
 	public void shouldSumAllChangeEntered() {
 		vending.insertCoin(quarter);
 		vending.insertCoin(quarter);
@@ -61,4 +61,7 @@ public class VendingTest {
 		vending.insertCoin(dime);
 		assertEquals("0.90", vending.display());
 	}
+	
+	
+	
 }

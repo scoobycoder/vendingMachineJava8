@@ -9,7 +9,7 @@ public class Vending {
 		if (sum == 0) {
 			return INSERTCOIN;
 		}
-		return String.valueOf(sum);
+		return String.format("%.2f",sum);
 	}
 
 	public void insertCoin(Coin coin) {
