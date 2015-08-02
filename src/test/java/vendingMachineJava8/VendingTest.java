@@ -2,6 +2,8 @@ package vendingMachineJava8;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,6 +18,8 @@ public class VendingTest {
 	private Coin dime;
 	private Coin quarter;
 	private Coin penny;
+	private VendingItem chips;
+	private VendingItem candy;
 
 	@Before
 	public void setup() {
@@ -25,7 +29,15 @@ public class VendingTest {
 		dime = (Dime) applicationContext.getBean("dime");
 		quarter = (Quarter) applicationContext.getBean("quarter");
 		penny = (Penny) applicationContext.getBean("penny");
+		chips = (Chips) applicationContext.getBean("chips");
+		candy = (Candy) applicationContext.getBean("candy");
 		
+	}
+	
+	private void insertMultipleCoins(Coin coin, int quantity) {
+		for (int i = 0; i < quantity; i++) {
+			vending.insertCoin(quarter);
+		}
 	}
 	
 	@Test
@@ -53,9 +65,7 @@ public class VendingTest {
 	
 	@Test
 	public void shouldSumAllChangeEntered() {
-		vending.insertCoin(quarter);
-		vending.insertCoin(quarter);
-		vending.insertCoin(quarter);
+		insertMultipleCoins(quarter, 3);
 		vending.insertCoin(nickle);
 		vending.insertCoin(penny);
 		vending.insertCoin(dime);
@@ -72,5 +82,29 @@ public class VendingTest {
 		assertEquals("0.35", vending.coinTray());
 	}
 	
+	@Test
+	public void shouldAllowPurchaseOfChipsForOneTwentyFiveWhenChipsIsPressed() {
+		insertMultipleCoins(quarter, 4);
+		vending.insertCoin(quarter);
+		ArrayList<VendingItem> expectedItems = new ArrayList<VendingItem>();
+		expectedItems.add(chips);
+
+		vending.purchase(chips);
+		
+		assertEquals(expectedItems, vending.itemBin());
+	}
+	
+	@Test
+	public void shouldAllowPurchaseOfChipsForOneTwentyFiveAndCandyForFifty() {
+		insertMultipleCoins(quarter, 7);
+		ArrayList<VendingItem> expectedItems = new ArrayList<VendingItem>();
+		expectedItems.add(chips);
+		expectedItems.add(candy);
+		
+		vending.purchase(chips);
+		vending.purchase(candy);
+		
+		assertEquals(expectedItems, vending.itemBin());
+	}
 	
 }

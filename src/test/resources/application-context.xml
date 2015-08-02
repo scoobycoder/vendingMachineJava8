@@ -19,4 +19,10 @@
 	<bean id="penny"
           class="vendingMachineJava8.Penny">
     </bean>
+	<bean id="chips"
+          class="vendingMachineJava8.Chips">
+    </bean>
+	<bean id="candy"
+          class="vendingMachineJava8.Candy">
+    </bean>
 </beans>
