@@ -11,11 +11,15 @@ public class VendingTest {
 
 	private ApplicationContext applicationContext;
 	private Vending vending;
+	private Nickle nickle;
+	private Dime dime;
 
 	@Before
 	public void setup() {
 		applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
 		vending = (Vending) applicationContext.getBean("vending");
+		nickle = (Nickle) applicationContext.getBean("nickle");
+		dime = (Dime) applicationContext.getBean("dime");
 	}
 	
 	@Test
@@ -25,13 +29,13 @@ public class VendingTest {
 	
 	@Test
 	public void shouldDisplayFiveCentsForNickle() {
-		vending.insertCoin(new Nickle());
+		vending.insertCoin(nickle);
 		assertEquals("0.05", vending.display());
 	}
 	
 	@Test
 	public void shouldDisplay10CentsforDime() {
-		vending.insertCoin(new Dime());
+		vending.insertCoin(dime);
 		assertEquals("0.10", vending.display());
 	}
 	

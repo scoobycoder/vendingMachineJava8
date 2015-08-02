@@ -7,4 +7,10 @@
 	<bean id="vending"
           class="vendingMachineJava8.Vending">
     </bean>
+	<bean id="nickle"
+          class="vendingMachineJava8.Nickle">
+    </bean>
+	<bean id="dime"
+          class="vendingMachineJava8.Dime">
+    </bean>
 </beans>
