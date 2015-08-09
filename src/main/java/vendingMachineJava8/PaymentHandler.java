@@ -2,13 +2,19 @@ package vendingMachineJava8;
 
 public class PaymentHandler {
 
+	private double totalAvailablePayments;
+
 	public boolean verifyPayment(double cost) {
-		return true;
+		boolean enoughPayment = false;
+		
+		if (totalAvailablePayments >= cost)
+			enoughPayment = true;
+		
+		return enoughPayment;
 	}
 
 	public void receivePayment(Payment payment) {
-		// TODO Auto-generated method stub
-		
+		totalAvailablePayments += payment.value();
 	}
 
 	public double returnBalanceOfPayment() {
