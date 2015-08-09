@@ -26,6 +26,7 @@ public class Vending {
 	}
 
 	public void insertCoin(Coin coin) {
+		paymentHandler.receivePayment(coin);
 		sum += coin.value();
 	}
 

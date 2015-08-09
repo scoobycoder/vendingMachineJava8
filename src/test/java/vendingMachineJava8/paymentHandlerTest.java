@@ -14,7 +14,9 @@ public class paymentHandlerTest {
 	private VendingItem mockedItem;
 	@Mock
 	private PaymentHandler paymentHandler;
-	
+	@Mock
+	private Coin mockedCoin;
+
 	@InjectMocks private Vending underTest = new Vending();
 	
     @Before public void initMocks() {
@@ -26,6 +28,13 @@ public class paymentHandlerTest {
 		underTest.purchase(mockedItem);
 		 
 		verify(paymentHandler).verifyPayment();
+	}
+	
+	@Test
+	public void shouldCallPaymentProcessorToAddCoins() {
+		underTest.insertCoin(mockedCoin);
+		
+		verify(paymentHandler).receivePayment(mockedCoin);
 	}
 	
 }

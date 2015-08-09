@@ -6,4 +6,9 @@ public class PaymentHandler {
 		return true;
 	}
 
+	public void receivePayment(Payment mockedCoin) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
