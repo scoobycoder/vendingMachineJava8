@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class paymentHandlerTest {
@@ -27,7 +28,7 @@ public class paymentHandlerTest {
 	public void shouldCallPaymentProcessor() {
 		underTest.purchase(mockedItem);
 		 
-		verify(paymentHandler).verifyPayment();
+		verify(paymentHandler).verifyPayment(mockedItem.getCost());
 	}
 	
 	@Test
@@ -35,6 +36,13 @@ public class paymentHandlerTest {
 		underTest.insertCoin(mockedCoin);
 		
 		verify(paymentHandler).receivePayment(mockedCoin);
+	}
+	
+	@Test
+	public void shouldReturnBalanceOfPaymentWhenTransactionComplete() {
+		underTest.returnCoins();
+		
+		verify(paymentHandler).returnBalanceOfPayment();
 	}
 	
 }

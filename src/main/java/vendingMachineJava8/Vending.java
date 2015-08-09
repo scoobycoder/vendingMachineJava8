@@ -35,7 +35,7 @@ public class Vending {
 	}
 
 	public void returnCoins() {
-		coinTray = sum;
+		coinTray = paymentHandler.returnBalanceOfPayment();;
 		sum = 0;
 	}
 
@@ -45,7 +45,7 @@ public class Vending {
 
 	public void purchase(VendingItem item) {
 		
-		if (paymentHandler.verifyPayment()){
+		if (paymentHandler.verifyPayment(item.getCost())){
 			completePurchase(item);
 			chargeCustomer(item);
 			returnCoins();
@@ -67,10 +67,6 @@ public class Vending {
 
 	private void completePurchase(VendingItem item) {
 		itemsInBin.add(item);
-	}
-
-	private boolean canAfford(VendingItem item) {
-		return item.getCost() <= sum;
 	}
 
 }

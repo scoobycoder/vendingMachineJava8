@@ -9,7 +9,9 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import static org.mockito.Mockito.when;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -25,6 +27,8 @@ public class VendingTest {
 
 	@Mock
 	private PaymentHandler paymentHandler;
+	@Mock
+	private VendingItem mockedItem;
 	
 	@InjectMocks private Vending underTest;
 
@@ -63,7 +67,7 @@ public class VendingTest {
 	}
 	
 	@Test
-	public void shouldDisplay10CentsforDime() {
+	public void shouldDisplay25CentsforQuarter() {
 		underTest.insertCoin(quarter);
 		assertEquals("0.25", underTest.display());
 	}
@@ -85,8 +89,8 @@ public class VendingTest {
 	
 	@Test
 	public void shouldReturnAllChangeWhenReturnChangeIsPressed() {
-		underTest.insertCoin(quarter);
-		underTest.insertCoin(dime);
+		when(paymentHandler.returnBalanceOfPayment()).thenReturn(0.35);
+		
 		underTest.returnCoins();
 		
 		assertEquals("INSERT COIN", underTest.display());
@@ -95,7 +99,8 @@ public class VendingTest {
 	
 	@Test
 	public void shouldAllowPurchaseOfChipsForOneTwentyFiveWhenChipsIsPressed() {
-		when(paymentHandler.verifyPayment()).thenReturn(true);
+		when(mockedItem.getCost()).thenReturn(1.25);
+		when(paymentHandler.verifyPayment(mockedItem.getCost())).thenReturn(true);
 		
 		insertMultipleCoins(quarter, 4);
 		underTest.insertCoin(quarter);
@@ -109,7 +114,8 @@ public class VendingTest {
 	
 	@Test
 	public void shouldAllowForPurchaseOfCandyForFiftyWhenCandyIsPressed() {
-		when(paymentHandler.verifyPayment()).thenReturn(true);
+		when(mockedItem.getCost()).thenReturn(0.50);
+		when(paymentHandler.verifyPayment(mockedItem.getCost())).thenReturn(true);
 		insertMultipleCoins(quarter, 2);
 		ArrayList<VendingItem> expectedItems = new ArrayList<VendingItem>();
 		expectedItems.add(candy);
@@ -121,24 +127,29 @@ public class VendingTest {
 	
 	@Test
 	public void shouldMakeChangeForItemsPurchased() {
-		when(paymentHandler.verifyPayment()).thenReturn(true);
+		when(mockedItem.getCost()).thenReturn(0.50);
+		when(paymentHandler.verifyPayment(mockedItem.getCost())).thenReturn(true);
+		when(paymentHandler.returnBalanceOfPayment()).thenReturn(0.25);
 		
-		insertMultipleCoins(quarter, 3);
-		underTest.purchase(candy);
+		underTest.purchase(mockedItem);
 		
 		assertEquals("0.25", underTest.coinTray());
 	}
 	
 	@Test
 	public void shouldAllowForPurchaseOfMultipleItemsWhenMoneyEnteredBetweenTransactions() {
-		when(paymentHandler.verifyPayment()).thenReturn(true);
+		when(mockedItem.getCost()).thenReturn(0.50);
+		when(paymentHandler.verifyPayment(mockedItem.getCost())).thenReturn(true);
+		when(mockedItem.getCost()).thenReturn(1.25);
+		when(paymentHandler.verifyPayment(mockedItem.getCost())).thenReturn(true);
 		
-		insertMultipleCoins(quarter, 2);
 		ArrayList<VendingItem> expectedItems = new ArrayList<VendingItem>();
 		expectedItems.add(candy);
 		expectedItems.add(chips);
 		
+		insertMultipleCoins(quarter, 2);
 		underTest.purchase(candy);
+		
 		insertMultipleCoins(quarter, 5);
 		underTest.purchase(chips);
 		
@@ -147,7 +158,8 @@ public class VendingTest {
 	
 	@Test
 	public void shouldReturnToInsertCoinDisplayAfterPurchaseComplete() {
-		when(paymentHandler.verifyPayment()).thenReturn(true);
+		when(mockedItem.getCost()).thenReturn(0.50);
+		when(paymentHandler.verifyPayment(mockedItem.getCost())).thenReturn(true);
 		
 		insertMultipleCoins(quarter, 2);
 		
