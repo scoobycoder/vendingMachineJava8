@@ -14,7 +14,7 @@ public class Vending {
 	}
 	
 	public String display() {
-		if (sum == 0) {
+		if (noMoney()) {
 			return INSERTCOIN;
 		}
 		return makeChangeFormat(sum);
@@ -28,25 +28,41 @@ public class Vending {
 		return makeChangeFormat(coinTray);
 	}
 
-	public void returnCoin() {
+	public void returnCoins() {
 		coinTray = sum;
 		sum = 0;
+	}
+
+	public ArrayList<VendingItem> itemBin() {
+		return itemsInBin;
+	}
+
+	public void purchase(VendingItem item) {
+		if (canAfford(item)) {
+			completePurchase(item);
+			chargeCustomer(item);
+			returnCoins();
+		}
+ 	}
+	
+	private boolean noMoney() {
+		return sum == 0;
 	}
 	
 	private String makeChangeFormat(double sums) {
 		return String.format("%.2f",sums);
 	}
 
-	public ArrayList<VendingItem> itemBin() {
-		return this.itemsInBin;
+	private void chargeCustomer(VendingItem item) {
+		sum -= item.getCost();
 	}
 
-	public void purchase(VendingItem item) {
-		if (item.getCost() <= sum) {
-			itemsInBin.add(item);
-			sum -= item.getCost();
-			returnCoin();
-		}
+	private void completePurchase(VendingItem item) {
+		itemsInBin.add(item);
+	}
+
+	private boolean canAfford(VendingItem item) {
+		return item.getCost() <= sum;
 	}
 
 }

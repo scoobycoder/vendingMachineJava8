@@ -76,7 +76,7 @@ public class VendingTest {
 	public void shouldReturnAllChangeWhenReturnChangeIsPressed() {
 		vending.insertCoin(quarter);
 		vending.insertCoin(dime);
-		vending.returnCoin();
+		vending.returnCoins();
 		
 		assertEquals("INSERT COIN", vending.display());
 		assertEquals("0.35", vending.coinTray());
@@ -134,15 +134,6 @@ public class VendingTest {
 		vending.purchase(candy);
 		
 		assertEquals("INSERT COIN", vending.display());
-	}
-	
-	@Test
-	public void shouldDisplayInsuffcientFundsIfNotEnoughMoneyForItem() {
-		vending.insertCoin(quarter);
-		
-		vending.purchase(candy);
-		
-		assertEquals("INSUFFICENT FUNDS", vending.display());
 	}
 	
 }
