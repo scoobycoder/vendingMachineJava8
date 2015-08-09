@@ -8,7 +8,12 @@ public class Vending {
 	private double sum = 0;
 	private double coinTray = 0;
 	private ArrayList<VendingItem> itemsInBin;
+	private PaymentHandler paymentHandler;
 	
+	public void setPaymentHandler(PaymentHandler paymentHandler) {
+		this.paymentHandler = paymentHandler;
+	}
+
 	public Vending() {
 		itemsInBin = new ArrayList<VendingItem>();
 	}
@@ -38,11 +43,13 @@ public class Vending {
 	}
 
 	public void purchase(VendingItem item) {
-		if (canAfford(item)) {
+		
+		if (paymentHandler.verifyPayment()){
 			completePurchase(item);
 			chargeCustomer(item);
 			returnCoins();
 		}
+		
  	}
 	
 	private boolean noMoney() {

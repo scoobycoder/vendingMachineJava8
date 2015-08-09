@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="vending"
-          class="vendingMachineJava8.Vending">
-    </bean>
-	<bean id="nickle"
-          class="vendingMachineJava8.Nickle">
-    </bean>
-	<bean id="dime"
-          class="vendingMachineJava8.Dime">
-    </bean>
-	<bean id="quarter"
-          class="vendingMachineJava8.Quarter">
-    </bean>
-	<bean id="penny"
-          class="vendingMachineJava8.Penny">
-    </bean>
-	<bean id="chips"
-          class="vendingMachineJava8.Chips">
-    </bean>
-	<bean id="candy"
-          class="vendingMachineJava8.Candy">
-    </bean>
+	<bean id="vending" class="vendingMachineJava8.Vending">
+	</bean>
+	<bean id="nickle" class="vendingMachineJava8.Nickle">
+	</bean>
+	<bean id="dime" class="vendingMachineJava8.Dime">
+	</bean>
+	<bean id="quarter" class="vendingMachineJava8.Quarter">
+	</bean>
+	<bean id="penny" class="vendingMachineJava8.Penny">
+	</bean>
+	<bean id="chips" class="vendingMachineJava8.Chips">
+	</bean>
+	<bean id="candy" class="vendingMachineJava8.Candy">
+	</bean>
+	<bean id="paymentHandler" class="vendingMachineJava8.PaymentHandler">
+	</bean>
+
 </beans>
