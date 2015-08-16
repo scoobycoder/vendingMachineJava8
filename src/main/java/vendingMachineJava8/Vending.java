@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class Vending {
 
 	public static final String INSERTCOIN = "INSERT COIN"; 
-	private double sum = 0;
-	private double coinTray = 0;
+	private double coinsInTray = 0;
 	private ArrayList<VendingItem> itemsInBin;
 	private PaymentHandler paymentHandler;
 	
@@ -22,21 +21,20 @@ public class Vending {
 		if (noMoney()) {
 			return INSERTCOIN;
 		}
-		return makeChangeFormat(sum);
+		return makeChangeFormat(paymentHandler.returnBalanceOfPayment());
 	}
 
 	public void insertCoin(Coin coin) {
 		paymentHandler.receivePayment(coin);
-		sum += coin.value();
 	}
 
 	public String coinTray() {
-		return makeChangeFormat(coinTray);
+		return makeChangeFormat(coinsInTray);
 	}
 
 	public void returnCoins() {
-		coinTray = paymentHandler.returnBalanceOfPayment();;
-		sum = 0;
+		coinsInTray = paymentHandler.returnBalanceOfPayment();
+		paymentHandler.verifyPayment(paymentHandler.returnBalanceOfPayment());
 	}
 
 	public ArrayList<VendingItem> itemBin() {
@@ -54,7 +52,7 @@ public class Vending {
  	}
 	
 	private boolean noMoney() {
-		return sum == 0;
+		return paymentHandler.returnBalanceOfPayment() == 0;
 	}
 	
 	private String makeChangeFormat(double sums) {
@@ -62,7 +60,7 @@ public class Vending {
 	}
 
 	private void chargeCustomer(VendingItem item) {
-		sum -= item.getCost();
+		paymentHandler.verifyPayment(item.getCost());
 	}
 
 	private void completePurchase(VendingItem item) {

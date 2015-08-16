@@ -7,8 +7,10 @@ public class PaymentHandler {
 	public boolean verifyPayment(double cost) {
 		boolean enoughPayment = false;
 		
-		if (totalAvailablePayments >= cost)
+		if (totalAvailablePayments >= cost) {
 			enoughPayment = true;
+			reduceAvailablePayment(cost);
+		}
 		
 		return enoughPayment;
 	}
@@ -18,7 +20,11 @@ public class PaymentHandler {
 	}
 
 	public double returnBalanceOfPayment() {
-		return 0.0;
+		return totalAvailablePayments;
+	}
+	
+	private void reduceAvailablePayment(double cost) {
+		totalAvailablePayments -= cost;
 	}
 
 }

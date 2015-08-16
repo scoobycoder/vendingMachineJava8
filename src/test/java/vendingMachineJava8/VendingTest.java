@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -61,16 +62,12 @@ public class VendingTest {
 	}
 	
 	@Test
-	public void shouldDisplayFiveCentsForNickle() {
-		underTest.insertCoin(nickle);
+	public void shouldDisplayPaymentAvailableOnDisplay() {
+		when(paymentHandler.returnBalanceOfPayment()).thenReturn(0.05);
+		
 		assertEquals("0.05", underTest.display());
 	}
 	
-	@Test
-	public void shouldDisplay25CentsforQuarter() {
-		underTest.insertCoin(quarter);
-		assertEquals("0.25", underTest.display());
-	}
 	
 	@Test
 	public void shouldDisplayInsertCoinforAnyOtherCoin() {
@@ -79,21 +76,11 @@ public class VendingTest {
 	}
 	
 	@Test
-	public void shouldSumAllChangeEntered() {
-		insertMultipleCoins(quarter, 3);
-		underTest.insertCoin(nickle);
-		underTest.insertCoin(penny);
-		underTest.insertCoin(dime);
-		assertEquals("0.90", underTest.display());
-	}
-	
-	@Test
 	public void shouldReturnAllChangeWhenReturnChangeIsPressed() {
 		when(paymentHandler.returnBalanceOfPayment()).thenReturn(0.35);
 		
 		underTest.returnCoins();
 		
-		assertEquals("INSERT COIN", underTest.display());
 		assertEquals("0.35", underTest.coinTray());
 	}
 	
