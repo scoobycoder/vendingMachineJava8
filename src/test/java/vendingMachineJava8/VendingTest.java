@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,8 +18,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class VendingTest {
 
 	private ApplicationContext applicationContext;
-	private Coin nickle;
-	private Coin dime;
 	private Coin quarter;
 	private Coin penny;
 	private VendingItem chips;
@@ -42,8 +39,6 @@ public class VendingTest {
 	public void setup() {
 		applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
 		underTest = (Vending) applicationContext.getBean("vending");
-		nickle = (Nickle) applicationContext.getBean("nickle");
-		dime = (Dime) applicationContext.getBean("dime");
 		quarter = (Quarter) applicationContext.getBean("quarter");
 		penny = (Penny) applicationContext.getBean("penny");
 		chips = (Chips) applicationContext.getBean("chips");
